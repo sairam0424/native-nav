@@ -1,31 +1,22 @@
-import { Text, View, StyleSheet, Image, Button } from "react-native";
-import React from "react";
+import { Link, useRouter } from "expo-router";
+import { Button, Text, View, StyleSheet, Platform } from "react-native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native";
+import Home from "./home";
+import Details from "./screens/details";
 
-import MyFlatList from "./components/flatlist"
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 50,
-  },
-  bigBlue: {
-    color: "blue",
-    fontWeight: "bold",
-    fontSize: 30,
-  },
-  red: {
-    color: "red",
-  },
-});
+const router = useRouter();
+
+const Stack = createNativeStackNavigator();
 
 export default function Index() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <MyFlatList />
-    </View>
+    <NavigationContainer independent={true}>
+      <Stack.Navigator initialRouteName="Welcome Home">
+        <Stack.Screen name="Welcome Home" component={Home} />
+        <Stack.Screen name="Details" component={Details} />
+
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
