@@ -4,8 +4,9 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import Home from "./home";
 import Details from "./screens/details";
-// import CreatePostScreen from "./screens/createPost";
 import CreatePostScreen from "./screens/createPost";
+import profile from "./screens/profile";
+// import { useRouter } from "expo-router";
 const router = useRouter();
 
 const Stack = createNativeStackNavigator();
@@ -17,17 +18,32 @@ export default function Index() {
         <Stack.Screen
           name="Home"
           component={Home}
-          options={{ title: "Dashboard" }}
+          options={{
+            title: "My home",
+            headerStyle: {
+              backgroundColor: "#f4511e",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              fontWeight: "bold",
+            },
+          }}
         />
         <Stack.Screen
           name="Details"
           component={Details}
           initialParams={{ itemId: 42 }}
         />
-         <Stack.Screen
+        <Stack.Screen
           name="CreatePost"
           component={CreatePostScreen}
           options={{ title: "write mail" }}
+        />
+
+        <Stack.Screen
+          name="Profile"
+          component={profile}
+          options={({ route }) => ({ title: route.params.name })}
         />
       </Stack.Navigator>
     </NavigationContainer>
